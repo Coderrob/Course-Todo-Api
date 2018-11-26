@@ -6,11 +6,11 @@ using Microsoft.Azure.WebJobs.Host;
 
 namespace CourseTodo.Api
 {
-    public static class ReviewTodo
+    public static class AuditTodo
     {
-        [FunctionName("ReviewTodo")]
+        [FunctionName("AuditTodo")]
         public static HttpResponseMessage Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todo/review")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "audit")]
             HttpRequestMessage req,
             TraceWriter log)
         {
