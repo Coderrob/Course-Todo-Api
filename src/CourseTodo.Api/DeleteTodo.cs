@@ -39,6 +39,9 @@ namespace CourseTodo.Api
             }
             catch (Exception ex)
             {
+                if (ex is DocumentClientException dce && string.Equals(dce.Error?.Code, "NotFound", StringComparison.InvariantCultureIgnoreCase))
+                    return req.CreateResponse(HttpStatusCode.OK);
+
                 log.LogError(ex, $"Failed to delete todo document. {ex.Message}");
                 return req.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
