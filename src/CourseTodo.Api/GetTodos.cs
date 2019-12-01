@@ -28,7 +28,8 @@ namespace CourseTodo.Api
 
                 using var client = DocumentDbClient.GetClient();
 
-                var results = client.CreateDocumentQuery<Todo>(collectionLink, query).ToList();
+                var feedOptions = new FeedOptions { EnableCrossPartitionQuery = true };
+                var results = client.CreateDocumentQuery<Todo>(collectionLink, query, feedOptions).ToList();
 
                 return req.CreateResponse(HttpStatusCode.OK, results);
             }
