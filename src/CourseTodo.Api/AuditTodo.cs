@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 
 namespace CourseTodo.Api
 {
@@ -12,7 +12,7 @@ namespace CourseTodo.Api
         public static HttpResponseMessage Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "audit")]
             HttpRequestMessage req,
-            TraceWriter log)
+            ILogger log)
         {
             // oh noz - exceptions
             throw new NotSupportedException("This feature has been disabled.");
