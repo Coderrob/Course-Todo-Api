@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -20,14 +21,19 @@ namespace CourseTodo.Api
         {
             try
             {
-                if (string.IsNullOrEmpty(id)) 
+                if (string.IsNullOrEmpty(id))
                     return req.CreateResponse(HttpStatusCode.OK);
 
                 var documentLink = UriFactory.CreateDocumentUri(Constants.DatabaseId, Constants.CollectionId, id);
 
                 using var client = DocumentDbClient.GetClient();
 
-                await client.DeleteDocumentAsync(documentLink);
+                var requestOptions = new RequestOptions
+                {
+                    PartitionKey = new PartitionKey(id)
+                };
+
+                await client.DeleteDocumentAsync(documentLink, requestOptions);
 
                 return req.CreateResponse(HttpStatusCode.OK);
             }
