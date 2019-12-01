@@ -6,6 +6,22 @@
 
 Course materials used for the Pluralsight course on troubleshooting using Microsoft Azure Portal.
 
+### Local Development Settings
+
+```
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  },
+  "Host": {
+    "LocalHttpPort": 7071,
+    "CORS": "*"
+  }
+}
+```
+
 
 #### License 
 
